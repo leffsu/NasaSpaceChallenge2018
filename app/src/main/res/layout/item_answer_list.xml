@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/answer_list_bg"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/text_answer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:minHeight="52dp"
+            android:textSize="18sp"
+            tools:text="Text answer" />
+
+    </LinearLayout>
+</RelativeLayout>
