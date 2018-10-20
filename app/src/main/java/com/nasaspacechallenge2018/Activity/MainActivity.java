@@ -10,6 +10,7 @@ import android.widget.Button;
 import com.nasaspacechallenge2018.Interface.MainActivityPresenterInterface;
 import com.nasaspacechallenge2018.Presenter.MainActivityPresenter;
 import com.nasaspacechallenge2018.R;
+import com.nasaspacechallenge2018.Utils.Decompress;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         presenter = new MainActivityPresenter(this);
+        Decompress.unzipDatabase(this,"nasa_db");
 
 
         settingsBtn = findViewById(R.id.settings);

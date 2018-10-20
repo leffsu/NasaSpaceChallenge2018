@@ -3,11 +3,13 @@ package com.nasaspacechallenge2018.Adapter;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.nasaspacechallenge2018.Database.Item;
 import com.nasaspacechallenge2018.Holders.AnswerHolder;
+import com.nasaspacechallenge2018.Models.ItemModel;
 import com.nasaspacechallenge2018.R;
 
 import java.util.ArrayList;
@@ -18,9 +20,9 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerHolder> {
 
     public static AnswerHolder.ClickAnswerListener clickAnswerListener;
     private Activity activity;
-    private ArrayList<Item> items;
+    private ArrayList<ItemModel> items;
 
-    public AnswerAdapter(Activity activity, List<Item> items){
+    public AnswerAdapter(Activity activity, List<ItemModel> items){
         this.activity = activity;
         this.items = new ArrayList<>(items);
     }
@@ -28,19 +30,19 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerHolder> {
     @NonNull
     @Override
     public AnswerHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new AnswerHolder(View.inflate(activity, R.layout.item_answer_list, viewGroup));
+        return new AnswerHolder(LayoutInflater.from(activity).inflate(R.layout.item_answer_list, viewGroup, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull AnswerHolder answerHolder, int i) {
-        Item item = items.get(i);
-        if(item.getRequired())
+        ItemModel item = items.get(i);
+       /* if(item.getREQUIRED() == 1)
             answerHolder.itemView.setVisibility(View.GONE);
-        else {
+        else*/ {
             answerHolder.itemView.setVisibility(View.VISIBLE);
-            answerHolder.testAnswer.setText(item.getName());
-            if(clickAnswerListener != null)
-                clickAnswerListener.onClickAnswer(i);
+            answerHolder.testAnswer.setText(item.getNAME());
+//            if(clickAnswerListener != null)
+//                clickAnswerListener.onClickAnswer(i);
         }
     }
 
