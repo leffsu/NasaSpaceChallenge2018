@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">Nasa Space Challenge 2018</string>
+    <string name="app_name">Quest</string>
+    <string name="exit">Exit</string>
+    <string name="continueT">Continue</string>
+    <string name="play2d">Play 2D</string>
+    <string name="play3d">Play 3D</string>
+    <string name="settings">Settings</string>
 </resources>

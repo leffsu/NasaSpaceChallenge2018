@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <gradient android:startColor="@color/white"
+                android:endColor="@color/Gainsboro"
+                android:angle="-90.0"/>
+            <corners android:radius="15.0dip" />
+        </shape>
+    </item>
+    <item android:bottom="20dip">
+        <shape>
+            <!--<solid android:color="@color/"/>-->
+            <corners android:bottomRightRadius="0.1dip"
+                android:bottomLeftRadius="0.1dip"
+                android:topLeftRadius="10dip"
+                android:topRightRadius="10dip"/>
+        </shape>
+    </item>
+</layer-list>
+<!--http://developer.alexanderklimov.ru/android/theory/drawable.php-->
+<!--https://android-tools.ru/coding/ispolzovanie-xml-drawables-v-prilozheniyax/-->
