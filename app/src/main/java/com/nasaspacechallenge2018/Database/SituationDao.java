@@ -24,9 +24,9 @@ public class SituationDao extends AbstractDao<Situation, Integer> {
     public static class Properties {
         public final static Property Id = new Property(0, int.class, "id", true, "ID");
         public final static Property MainDescription = new Property(1, String.class, "mainDescription", false, "MAIN_DESCRIPTION");
-        public final static Property ComponentText = new Property(2, String.class, "componentText", false, "COMPONENT_TEXT");
+        public final static Property ComponentTextBase = new Property(2, String.class, "componentTextBase", false, "COMPONENT_TEXT_BASE");
         public final static Property Background = new Property(3, int.class, "background", false, "BACKGROUND");
-        public final static Property Flow = new Property(4, boolean.class, "flow", false, "FLOW");
+        public final static Property ErrorMessage = new Property(4, String.class, "errorMessage", false, "ERROR_MESSAGE");
     }
 
 
@@ -44,9 +44,9 @@ public class SituationDao extends AbstractDao<Situation, Integer> {
         db.execSQL("CREATE TABLE " + constraint + "\"SITUATION\" (" + //
                 "\"ID\" INTEGER PRIMARY KEY NOT NULL ," + // 0: id
                 "\"MAIN_DESCRIPTION\" TEXT," + // 1: mainDescription
-                "\"COMPONENT_TEXT\" TEXT," + // 2: componentText
+                "\"COMPONENT_TEXT_BASE\" TEXT," + // 2: componentTextBase
                 "\"BACKGROUND\" INTEGER NOT NULL ," + // 3: background
-                "\"FLOW\" INTEGER NOT NULL );"); // 4: flow
+                "\"ERROR_MESSAGE\" TEXT);"); // 4: errorMessage
     }
 
     /** Drops the underlying database table. */
@@ -65,12 +65,16 @@ public class SituationDao extends AbstractDao<Situation, Integer> {
             stmt.bindString(2, mainDescription);
         }
  
-        String componentText = entity.getComponentText();
-        if (componentText != null) {
-            stmt.bindString(3, componentText);
+        String componentTextBase = entity.getComponentTextBase();
+        if (componentTextBase != null) {
+            stmt.bindString(3, componentTextBase);
         }
         stmt.bindLong(4, entity.getBackground());
-        stmt.bindLong(5, entity.getFlow() ? 1L: 0L);
+ 
+        String errorMessage = entity.getErrorMessage();
+        if (errorMessage != null) {
+            stmt.bindString(5, errorMessage);
+        }
     }
 
     @Override
@@ -83,12 +87,16 @@ public class SituationDao extends AbstractDao<Situation, Integer> {
             stmt.bindString(2, mainDescription);
         }
  
-        String componentText = entity.getComponentText();
-        if (componentText != null) {
-            stmt.bindString(3, componentText);
+        String componentTextBase = entity.getComponentTextBase();
+        if (componentTextBase != null) {
+            stmt.bindString(3, componentTextBase);
         }
         stmt.bindLong(4, entity.getBackground());
-        stmt.bindLong(5, entity.getFlow() ? 1L: 0L);
+ 
+        String errorMessage = entity.getErrorMessage();
+        if (errorMessage != null) {
+            stmt.bindString(5, errorMessage);
+        }
     }
 
     @Override
@@ -101,9 +109,9 @@ public class SituationDao extends AbstractDao<Situation, Integer> {
         Situation entity = new Situation( //
             cursor.getInt(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // mainDescription
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // componentText
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // componentTextBase
             cursor.getInt(offset + 3), // background
-            cursor.getShort(offset + 4) != 0 // flow
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // errorMessage
         );
         return entity;
     }
@@ -112,9 +120,9 @@ public class SituationDao extends AbstractDao<Situation, Integer> {
     public void readEntity(Cursor cursor, Situation entity, int offset) {
         entity.setId(cursor.getInt(offset + 0));
         entity.setMainDescription(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setComponentText(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setComponentTextBase(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setBackground(cursor.getInt(offset + 3));
-        entity.setFlow(cursor.getShort(offset + 4) != 0);
+        entity.setErrorMessage(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
      }
     
     @Override

@@ -18,7 +18,7 @@ public class Play2DActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.play2d_layout);
 
-        presenter = new Play2DPresenter(this);
+        presenter = new Play2DPresenter(this, null);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);

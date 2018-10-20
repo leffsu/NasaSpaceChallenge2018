@@ -23,7 +23,7 @@ public class ItemDao extends AbstractDao<Item, Integer> {
      */
     public static class Properties {
         public final static Property Id = new Property(0, int.class, "id", true, "ID");
-        public final static Property SubsituationId = new Property(1, int.class, "subsituationId", false, "SUBSITUATION_ID");
+        public final static Property SituationId = new Property(1, int.class, "situationId", false, "SITUATION_ID");
         public final static Property Name = new Property(2, String.class, "name", false, "NAME");
         public final static Property Action = new Property(3, String.class, "action", false, "ACTION");
         public final static Property Required = new Property(4, boolean.class, "required", false, "REQUIRED");
@@ -43,7 +43,7 @@ public class ItemDao extends AbstractDao<Item, Integer> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"ITEM\" (" + //
                 "\"ID\" INTEGER PRIMARY KEY NOT NULL ," + // 0: id
-                "\"SUBSITUATION_ID\" INTEGER NOT NULL ," + // 1: subsituationId
+                "\"SITUATION_ID\" INTEGER NOT NULL ," + // 1: situationId
                 "\"NAME\" TEXT," + // 2: name
                 "\"ACTION\" TEXT," + // 3: action
                 "\"REQUIRED\" INTEGER NOT NULL );"); // 4: required
@@ -59,7 +59,7 @@ public class ItemDao extends AbstractDao<Item, Integer> {
     protected final void bindValues(DatabaseStatement stmt, Item entity) {
         stmt.clearBindings();
         stmt.bindLong(1, entity.getId());
-        stmt.bindLong(2, entity.getSubsituationId());
+        stmt.bindLong(2, entity.getSituationId());
  
         String name = entity.getName();
         if (name != null) {
@@ -77,7 +77,7 @@ public class ItemDao extends AbstractDao<Item, Integer> {
     protected final void bindValues(SQLiteStatement stmt, Item entity) {
         stmt.clearBindings();
         stmt.bindLong(1, entity.getId());
-        stmt.bindLong(2, entity.getSubsituationId());
+        stmt.bindLong(2, entity.getSituationId());
  
         String name = entity.getName();
         if (name != null) {
@@ -100,7 +100,7 @@ public class ItemDao extends AbstractDao<Item, Integer> {
     public Item readEntity(Cursor cursor, int offset) {
         Item entity = new Item( //
             cursor.getInt(offset + 0), // id
-            cursor.getInt(offset + 1), // subsituationId
+            cursor.getInt(offset + 1), // situationId
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // name
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // action
             cursor.getShort(offset + 4) != 0 // required
@@ -111,7 +111,7 @@ public class ItemDao extends AbstractDao<Item, Integer> {
     @Override
     public void readEntity(Cursor cursor, Item entity, int offset) {
         entity.setId(cursor.getInt(offset + 0));
-        entity.setSubsituationId(cursor.getInt(offset + 1));
+        entity.setSituationId(cursor.getInt(offset + 1));
         entity.setName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setAction(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setRequired(cursor.getShort(offset + 4) != 0);

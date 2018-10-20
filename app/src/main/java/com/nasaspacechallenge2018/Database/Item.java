@@ -13,7 +13,7 @@ public class Item {
     int id;
 
     @Property
-    int subsituationId;
+    int situationId;
 
     @Property
     String name;
@@ -27,11 +27,11 @@ public class Item {
     @Property
     boolean required;
 
-    @Generated(hash = 3313789)
-    public Item(int id, int subsituationId, String name, String action,
+    @Generated(hash = 1851249132)
+    public Item(int id, int situationId, String name, String action,
             boolean required) {
         this.id = id;
-        this.subsituationId = subsituationId;
+        this.situationId = situationId;
         this.name = name;
         this.action = action;
         this.required = required;
@@ -65,19 +65,19 @@ public class Item {
         this.name = name;
     }
 
-    public int getSubsituationId() {
-        return this.subsituationId;
-    }
-
-    public void setSubsituationId(int subsituationId) {
-        this.subsituationId = subsituationId;
-    }
-
     public boolean getRequired() {
         return this.required;
     }
 
     public void setRequired(boolean required) {
         this.required = required;
+    }
+
+    public int getSituationId() {
+        return this.situationId;
+    }
+
+    public void setSituationId(int situationId) {
+        this.situationId = situationId;
     }
 }
