@@ -61,7 +61,7 @@ public class Situation {
     }
 
     public static List<Situation> getSituations() {
-        return parseSituations(Situation.getSituations());
+        return parseSituations(App.getDaoSession().getSituationDao().loadAll());
     }
 
     public static Situation getSituation(int situationId) {
