@@ -1,5 +1,6 @@
 package com.nasaspacechallenge2018.Activity;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         continueBtn.setOnClickListener(continueBtnListener);
         player2dBtn.setOnClickListener(play2DBtnListener);
         player3dBtn.setOnClickListener(play3dBtnListener);
+
     }
 
     View.OnClickListener settingsBtnListener = new View.OnClickListener() {
