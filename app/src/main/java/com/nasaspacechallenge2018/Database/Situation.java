@@ -28,18 +28,23 @@ public class Situation {
     @Property
     int background;
 
-    @Generated(hash = 298514316)
-    public Situation(int id, String mainDescription, String componentText, int background) {
+    @Property
+    boolean flow; // есть ли выборы в ситуации, true - нет, диалог
+
+    @Generated(hash = 1374774706)
+    public Situation(int id, String mainDescription, String componentText, int background,
+            boolean flow) {
         this.id = id;
         this.mainDescription = mainDescription;
         this.componentText = componentText;
         this.background = background;
+        this.flow = flow;
     }
 
     @Generated(hash = 1070369673)
     public Situation() {
     }
-
+    
     public int getId() {
         return this.id;
     }
@@ -102,5 +107,13 @@ public class Situation {
 
     public void setBackground(int background) {
         this.background = background;
+    }
+
+    public boolean getFlow() {
+        return this.flow;
+    }
+
+    public void setFlow(boolean flow) {
+        this.flow = flow;
     }
 }
