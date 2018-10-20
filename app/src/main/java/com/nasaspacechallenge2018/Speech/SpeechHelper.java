@@ -71,7 +71,7 @@ public class SpeechHelper implements RecognizerListener, VocalizerListener {
         vocalizer.prepare();
     }
 
-    public SpeechHelper getInstance(Activity activity) {
+    public static SpeechHelper getInstance(Activity activity) {
         if (instance == null)
             instance = new SpeechHelper(activity);
         return instance;
