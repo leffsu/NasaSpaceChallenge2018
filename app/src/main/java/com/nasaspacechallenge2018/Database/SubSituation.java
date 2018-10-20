@@ -28,13 +28,16 @@ public class SubSituation {
     @Transient
     List<Item> items;
 
-    @Generated(hash = 1843923789)
-    public SubSituation(int id, int situationId, String name,
-                        String componentText) {
+    @Property
+    int background;
+
+    @Generated(hash = 896968781)
+    public SubSituation(int id, int situationId, String name, String componentText, int background) {
         this.id = id;
         this.situationId = situationId;
         this.name = name;
         this.componentText = componentText;
+        this.background = background;
     }
 
     @Generated(hash = 17375987)
@@ -106,5 +109,13 @@ public class SubSituation {
         subSituation.setItems(App.getDaoSession().getItemDao().queryBuilder().where(ItemDao.Properties.SubsituationId.eq(subSituation.getId())).list());
 
         return subSituation;
+    }
+
+    public int getBackground() {
+        return this.background;
+    }
+
+    public void setBackground(int background) {
+        this.background = background;
     }
 }

@@ -25,11 +25,15 @@ public class Situation {
     @Transient
     List<SubSituation> subSituations;
 
-    @Generated(hash = 1367395513)
-    public Situation(int id, String mainDescription, String componentText) {
+    @Property
+    int background;
+
+    @Generated(hash = 298514316)
+    public Situation(int id, String mainDescription, String componentText, int background) {
         this.id = id;
         this.mainDescription = mainDescription;
         this.componentText = componentText;
+        this.background = background;
     }
 
     @Generated(hash = 1070369673)
@@ -90,5 +94,13 @@ public class Situation {
 
     public void setSubSituations(List<SubSituation> subSituations) {
         this.subSituations = subSituations;
+    }
+
+    public int getBackground() {
+        return this.background;
+    }
+
+    public void setBackground(int background) {
+        this.background = background;
     }
 }

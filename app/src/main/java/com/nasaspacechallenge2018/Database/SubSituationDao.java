@@ -26,6 +26,7 @@ public class SubSituationDao extends AbstractDao<SubSituation, Integer> {
         public final static Property SituationId = new Property(1, int.class, "situationId", false, "SITUATION_ID");
         public final static Property Name = new Property(2, String.class, "name", false, "NAME");
         public final static Property ComponentText = new Property(3, String.class, "componentText", false, "COMPONENT_TEXT");
+        public final static Property Background = new Property(4, int.class, "background", false, "BACKGROUND");
     }
 
 
@@ -44,7 +45,8 @@ public class SubSituationDao extends AbstractDao<SubSituation, Integer> {
                 "\"ID\" INTEGER PRIMARY KEY NOT NULL ," + // 0: id
                 "\"SITUATION_ID\" INTEGER NOT NULL ," + // 1: situationId
                 "\"NAME\" TEXT," + // 2: name
-                "\"COMPONENT_TEXT\" TEXT);"); // 3: componentText
+                "\"COMPONENT_TEXT\" TEXT," + // 3: componentText
+                "\"BACKGROUND\" INTEGER NOT NULL );"); // 4: background
     }
 
     /** Drops the underlying database table. */
@@ -68,6 +70,7 @@ public class SubSituationDao extends AbstractDao<SubSituation, Integer> {
         if (componentText != null) {
             stmt.bindString(4, componentText);
         }
+        stmt.bindLong(5, entity.getBackground());
     }
 
     @Override
@@ -85,6 +88,7 @@ public class SubSituationDao extends AbstractDao<SubSituation, Integer> {
         if (componentText != null) {
             stmt.bindString(4, componentText);
         }
+        stmt.bindLong(5, entity.getBackground());
     }
 
     @Override
@@ -98,7 +102,8 @@ public class SubSituationDao extends AbstractDao<SubSituation, Integer> {
             cursor.getInt(offset + 0), // id
             cursor.getInt(offset + 1), // situationId
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // name
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // componentText
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // componentText
+            cursor.getInt(offset + 4) // background
         );
         return entity;
     }
@@ -109,6 +114,7 @@ public class SubSituationDao extends AbstractDao<SubSituation, Integer> {
         entity.setSituationId(cursor.getInt(offset + 1));
         entity.setName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setComponentText(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setBackground(cursor.getInt(offset + 4));
      }
     
     @Override
