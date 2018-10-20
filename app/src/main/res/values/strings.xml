@@ -8,4 +8,8 @@
     <string name="are_u_sure">Вы уверены что хотите выйти  из игры?</string>
     <string name="yes">Да</string>
     <string name="no">Нет</string>
+    <string name="without_sound">Без звука</string>
+    <string name="without_save">Без сохранений</string>
+    <string name="guide">Гайд по сборке пирамиды</string>
+
 </resources>
