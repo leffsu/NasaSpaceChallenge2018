@@ -26,6 +26,7 @@ public class ItemDao extends AbstractDao<Item, Integer> {
         public final static Property SubsituationId = new Property(1, int.class, "subsituationId", false, "SUBSITUATION_ID");
         public final static Property Name = new Property(2, String.class, "name", false, "NAME");
         public final static Property Action = new Property(3, String.class, "action", false, "ACTION");
+        public final static Property Required = new Property(4, boolean.class, "required", false, "REQUIRED");
     }
 
 
@@ -44,7 +45,8 @@ public class ItemDao extends AbstractDao<Item, Integer> {
                 "\"ID\" INTEGER PRIMARY KEY NOT NULL ," + // 0: id
                 "\"SUBSITUATION_ID\" INTEGER NOT NULL ," + // 1: subsituationId
                 "\"NAME\" TEXT," + // 2: name
-                "\"ACTION\" TEXT);"); // 3: action
+                "\"ACTION\" TEXT," + // 3: action
+                "\"REQUIRED\" INTEGER NOT NULL );"); // 4: required
     }
 
     /** Drops the underlying database table. */
@@ -68,6 +70,7 @@ public class ItemDao extends AbstractDao<Item, Integer> {
         if (action != null) {
             stmt.bindString(4, action);
         }
+        stmt.bindLong(5, entity.getRequired() ? 1L: 0L);
     }
 
     @Override
@@ -85,6 +88,7 @@ public class ItemDao extends AbstractDao<Item, Integer> {
         if (action != null) {
             stmt.bindString(4, action);
         }
+        stmt.bindLong(5, entity.getRequired() ? 1L: 0L);
     }
 
     @Override
@@ -98,7 +102,8 @@ public class ItemDao extends AbstractDao<Item, Integer> {
             cursor.getInt(offset + 0), // id
             cursor.getInt(offset + 1), // subsituationId
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // name
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // action
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // action
+            cursor.getShort(offset + 4) != 0 // required
         );
         return entity;
     }
@@ -109,6 +114,7 @@ public class ItemDao extends AbstractDao<Item, Integer> {
         entity.setSubsituationId(cursor.getInt(offset + 1));
         entity.setName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setAction(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setRequired(cursor.getShort(offset + 4) != 0);
      }
     
     @Override

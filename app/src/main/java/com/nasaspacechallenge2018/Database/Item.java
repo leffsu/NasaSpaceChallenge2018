@@ -4,6 +4,7 @@ import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Property;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Transient;
 
 @Entity
 public class Item {
@@ -20,12 +21,20 @@ public class Item {
     @Property
     String action;
 
-    @Generated(hash = 1330631792)
-    public Item(int id, int subsituationId, String name, String action) {
+    @Transient
+    int taken;
+
+    @Property
+    boolean required;
+
+    @Generated(hash = 3313789)
+    public Item(int id, int subsituationId, String name, String action,
+            boolean required) {
         this.id = id;
         this.subsituationId = subsituationId;
         this.name = name;
         this.action = action;
+        this.required = required;
     }
 
     @Generated(hash = 1470900980)
@@ -62,5 +71,13 @@ public class Item {
 
     public void setSubsituationId(int subsituationId) {
         this.subsituationId = subsituationId;
+    }
+
+    public boolean getRequired() {
+        return this.required;
+    }
+
+    public void setRequired(boolean required) {
+        this.required = required;
     }
 }
