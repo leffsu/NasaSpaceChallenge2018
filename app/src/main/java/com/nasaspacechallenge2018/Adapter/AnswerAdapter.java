@@ -11,6 +11,7 @@ import com.nasaspacechallenge2018.Holders.AnswerHolder;
 import com.nasaspacechallenge2018.R;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.zip.Inflater;
 
 public class AnswerAdapter extends RecyclerView.Adapter<AnswerHolder> {
@@ -19,9 +20,9 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerHolder> {
     private Activity activity;
     private ArrayList<Item> items;
 
-    public AnswerAdapter(Activity activity, ArrayList<Item> items){
+    public AnswerAdapter(Activity activity, List<Item> items){
         this.activity = activity;
-        this.items = items;
+        this.items = new ArrayList<>(items);
     }
 
     @NonNull

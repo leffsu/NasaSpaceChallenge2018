@@ -14,19 +14,18 @@ import com.nasaspacechallenge2018.Speech.SpeechHelper;
 
 public class Play2DPresenter implements Play2DPresenterInterface, AnswerHolder.ClickAnswerListener, RecognListener {
 
-    private Activity activity;
     private SpeechHelper speechHelper;
     private Play2DActivityInterface mvpActivity;
     private boolean isPlay;
     private Situation situation;
     private AnswerAdapter adapter;
 
-    public Play2DPresenter(Activity activity, Play2DActivityInterface mvpActivity){
-        this.activity = activity;
-        this.speechHelper = SpeechHelper.getInstance(activity);
+    public Play2DPresenter(Play2DActivityInterface mvpActivity){
+        this.speechHelper = SpeechHelper.getInstance((Activity) mvpActivity);
         this.mvpActivity = mvpActivity;
         this.isPlay = false;
-//        this.adapter = new AnswerAdapter(activity, )
+
+        updateDate();
     }
 
     @Override
@@ -58,5 +57,13 @@ public class Play2DPresenter implements Play2DPresenterInterface, AnswerHolder.C
     @Override
     public void onFinishListen() {
 
+    }
+
+    private void updateDate(){
+        this.adapter = new AnswerAdapter((Activity) mvpActivity, situation.getItems());
+
+        this.mvpActivity.setAdapter(adapter);
+        this.mvpActivity.setTextSituation(situation.getCurrentComponentText());
+//        this.mvpActivity.setImageSituation(situation.);
     }
 }
