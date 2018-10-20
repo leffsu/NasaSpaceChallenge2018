@@ -155,6 +155,9 @@ public class SpeechHelper implements RecognizerListener, VocalizerListener {
             };
             Volley.newRequestQueue(activity).add(request);
         }
+        else
+            if(recognizerListener != null)
+                recognizerListener.onFinishListen();
     }
 
     @Override
