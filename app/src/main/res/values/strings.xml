@@ -5,4 +5,7 @@
     <string name="play2d">Play 2D</string>
     <string name="play3d">Play 3D</string>
     <string name="settings">Settings</string>
+    <string name="without_sound">Без звука</string>
+    <string name="without_save">Без сохранений</string>
+    <string name="guide">Гайд по сборке пирамиды</string>
 </resources>

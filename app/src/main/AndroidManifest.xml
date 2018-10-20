@@ -24,6 +24,12 @@
         <activity android:name=".Activity.Play3DActivity"/>
 
         <activity android:name=".Activity.SettingsActivity"/>
+        <activity android:name=".Activity.PlayVRActivity">
+
+            <intent-filter>
+                <category android:name="com.google.intent.category.CARDBOARD" />
+            </intent-filter>
+        </activity>
 
 
     </application>

@@ -5,7 +5,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.nasaspacechallenge2018"
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -57,6 +57,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation 'com.android.volley:volley:1.1.1'
     implementation 'com.yandex.android:speechkit:3.12.2'
+    implementation 'com.google.vr:sdk-panowidget:1.170.0'
 
     
 }
