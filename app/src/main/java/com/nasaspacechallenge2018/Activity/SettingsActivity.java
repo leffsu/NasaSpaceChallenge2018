@@ -30,6 +30,7 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.settings_layout);
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         initSwitch();
     }
 
