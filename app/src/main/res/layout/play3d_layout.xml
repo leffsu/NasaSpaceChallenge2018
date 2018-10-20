@@ -11,61 +11,70 @@
         android:layout_height="match_parent" >
     </TableLayout>
 
-    <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_alignParentTop="true"-->
-        <!--android:layout_centerInParent="true">-->
+    <ImageView
+        android:layout_margin="8dp"
+        android:layout_alignParentRight="true"
+        android:src="@mipmap/play"
+        android:id="@+id/repeat_text_situation"
+        android:layout_width="40dp"
+        android:layout_height="40dp" />
 
-        <!--<ImageView-->
-            <!--android:id="@+id/image_top_3d"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_above="@+id/center_btn_layout"-->
-            <!--android:layout_below="@+id/text_quest_2d"-->
-            <!--android:layout_centerInParent="true"-->
-            <!--android:background="@color/white"-->
-            <!--android:minWidth="125dp"-->
-            <!--android:minHeight="125dp" />-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true">
 
-        <!--<RelativeLayout-->
-            <!--android:id="@+id/center_btn_layout"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_centerInParent="true">-->
-            <!--<ImageView-->
-                <!--android:id="@+id/image_left_3d"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_alignParentLeft="true"-->
-                <!--android:layout_centerInParent="true"-->
-                <!--android:background="@color/white"-->
-                <!--android:minWidth="125dp"-->
-                <!--android:minHeight="125dp" />-->
+        <ImageView
+            android:id="@+id/image_top_3d"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/center_btn_layout"
+            android:layout_below="@+id/text_quest_2d"
+            android:layout_centerInParent="true"
+            android:background="@color/white"
+            android:minWidth="125dp"
+            android:minHeight="125dp" />
 
-            <!--<ImageView-->
-                <!--android:id="@+id/image_right_3d"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_alignParentRight="true"-->
-                <!--android:layout_centerInParent="true"-->
-                <!--android:background="@color/white"-->
-                <!--android:minWidth="125dp"-->
-                <!--android:minHeight="125dp" />-->
-        <!--</RelativeLayout>-->
+        <RelativeLayout
+            android:id="@+id/center_btn_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+            <ImageView
+                android:id="@+id/image_left_3d"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:background="@color/white"
+                android:minWidth="125dp"
+                android:minHeight="125dp" />
 
-        <!--<ImageView-->
-            <!--android:id="@+id/image_bottom_3d"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_below="@+id/center_btn_layout"-->
-            <!--android:layout_centerInParent="true"-->
-            <!--android:background="@color/white"-->
-            <!--android:minWidth="125dp"-->
-            <!--android:minHeight="125dp" />-->
-    <!--</RelativeLayout>-->
+            <ImageView
+                android:id="@+id/image_right_3d"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:background="@color/white"
+                android:minWidth="125dp"
+                android:minHeight="125dp" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/image_bottom_3d"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/center_btn_layout"
+            android:layout_centerInParent="true"
+            android:background="@color/white"
+            android:minWidth="125dp"
+            android:minHeight="125dp" />
+    </RelativeLayout>
     
     <ImageView
+        android:id="@+id/voice_answer_btn"
         android:layout_margin="8dp"
         android:padding="8dp"
         android:src="@mipmap/micro"

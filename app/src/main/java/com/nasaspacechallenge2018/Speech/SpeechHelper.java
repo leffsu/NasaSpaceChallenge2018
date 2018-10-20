@@ -6,17 +6,22 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.nasaspacechallenge2018.Models.WitEntity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import ru.yandex.speechkit.Emotion;
@@ -37,6 +42,12 @@ import ru.yandex.speechkit.Voice;
 
 public class SpeechHelper implements RecognizerListener, VocalizerListener {
     private static SpeechHelper instance;
+
+    private static final String ENTITY_LOCATION = "locations";
+    private static final String ENTITY_PEOPLE = "people";
+    private static final String ENTITY_ACTION = "action";
+    private static final String ENTITY_ANSWER = "answer";
+    private static final String ENTITY_ITEM = "item";
 
     private static final int RC_RECORD_AUDIO = 842;
 
@@ -127,14 +138,20 @@ public class SpeechHelper implements RecognizerListener, VocalizerListener {
     public void onRecordingDone(@NonNull Recognizer recognizer) {
         if(!result.equals("")) {
             JsonObjectRequest request = new JsonObjectRequest(com.android.volley.Request.Method.GET,
-                    "https://api.wit.ai/message?v=20181020&q=" + result, null, new Response.Listener<JSONObject>() {
+                    "https://api.wit.ai/message?v=20181021&q=" + result, null, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
                     try {
-                        if (response.getJSONObject("entities").keys().hasNext()) {
-                            if (recognizerListener != null)
-                                recognizerListener.onResult(response.getJSONObject("entities").keys().next());
+                        List<WitEntity> result = new ArrayList<>();
+                        for (Iterator<String> it = response.getJSONObject("entities").keys(); it.hasNext(); ) {
+                            String key = it.next();
+                            result.add(new WitEntity(key,
+                                    response.getJSONObject("entities").getJSONArray(key).getJSONObject(0).getString("value"),
+                                    response.getJSONObject("entities").getJSONArray(key).getJSONObject(0).getString("type")));
+
                         }
+                        if(recognizerListener != null)
+                            recognizerListener.onResult(result);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -146,6 +163,7 @@ public class SpeechHelper implements RecognizerListener, VocalizerListener {
                         recognizerListener.onError(error.getMessage());
                 }
             }) {
+
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
                     HashMap<String, String> map = new HashMap<>();
@@ -177,7 +195,7 @@ public class SpeechHelper implements RecognizerListener, VocalizerListener {
 
     @Override
     public void onRecognizerError(@NonNull Recognizer recognizer, @NonNull Error error) {
-
+        Log.d("test", error.toString());
     }
 
     @Override

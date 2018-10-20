@@ -21,7 +21,7 @@ import com.nasaspacechallenge2018.Speech.SpeechHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Play2DPresenter implements Play2DPresenterInterface, AnswerHolder.ClickAnswerListener, RecognListener {
+public class Play2DPresenter implements Play2DPresenterInterface, AnswerHolder.ClickAnswerListener{
 
     private SpeechHelper speechHelper;
     private Play2DActivityInterface mvpActivity;
@@ -52,26 +52,6 @@ public class Play2DPresenter implements Play2DPresenterInterface, AnswerHolder.C
         updateDate();
     }
 
-    @Override
-    public void onResult(String result) {
-
-    }
-
-    @Override
-    public void onError(String error) {
-
-    }
-
-    @Override
-    public void onStartListen() {
-
-    }
-
-    @Override
-    public void onFinishListen() {
-
-    }
-
     private void updateDate(){
         if(currentSituation >= situationModels.size())
             return;
@@ -79,7 +59,7 @@ public class Play2DPresenter implements Play2DPresenterInterface, AnswerHolder.C
         situation = situationModels.get(currentSituation);
         List<ItemModel> items = ItemTable.install((Activity)mvpActivity).getItemsBySituatoinId(situation.getID());
         if(items.size() == 0)
-            items.add(new ItemModel(0, situation.getID(), "Продолжить", "Продолжить", 0));
+            items.add(new ItemModel(0, situation.getID(), "Продолжить", "Продолжить", 0, "forward"));
         this.adapter = new AnswerAdapter((Activity) mvpActivity, items);
         this.adapter.setClickAnswerListener(this);
 

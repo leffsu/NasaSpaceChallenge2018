@@ -29,6 +29,7 @@ public class ItemTable {
         String NAME = "";
         int REQUIRED = 0;
         String ACTION = "";
+        String SYNONYM = "";
 
         Cursor cursor = null;
         SQLiteDatabase db = DBConnect.install(context).connect();
@@ -41,8 +42,9 @@ public class ItemTable {
                 NAME = cursor.getString(cursor.getColumnIndex("NAME"));
                 REQUIRED = cursor.getInt(cursor.getColumnIndex("REQUIRED"));
                 ACTION = cursor.getString(cursor.getColumnIndex("ACTION"));
+                SYNONYM = cursor.getString(cursor.getColumnIndex("SYNONYM"));
 
-                items.add(new ItemModel(ID, SITUATION_ID, NAME, ACTION, REQUIRED));
+                items.add(new ItemModel(ID, SITUATION_ID, NAME, ACTION, REQUIRED, SYNONYM));
                 cursor.moveToNext();
             }
             cursor.close();
@@ -66,6 +68,7 @@ public class ItemTable {
         String NAME = "";
         int REQUIRED = 0;
         String ACTION = "";
+        String SYNONYM = "";
 
         Cursor cursor = null;
         SQLiteDatabase db = DBConnect.install(context).connect();
@@ -78,8 +81,9 @@ public class ItemTable {
                 NAME = cursor.getString(cursor.getColumnIndex("NAME"));
                 REQUIRED = cursor.getInt(cursor.getColumnIndex("REQUIRED"));
                 ACTION = cursor.getString(cursor.getColumnIndex("ACTION"));
+                SYNONYM = cursor.getString(cursor.getColumnIndex("SYNONYM"));
 
-                items.add(new ItemModel(ID, SITUATION_ID, NAME, ACTION, REQUIRED));
+                items.add(new ItemModel(ID, SITUATION_ID, NAME, ACTION, REQUIRED, SYNONYM));
                 cursor.moveToNext();
             }
             cursor.close();
@@ -103,6 +107,7 @@ public class ItemTable {
         String NAME = "";
         int REQUIRED = 0;
         String ACTION = "";
+        String SYNONYM = "";
 
         Cursor cursor = null;
         SQLiteDatabase db = DBConnect.install(context).connect();
@@ -115,8 +120,9 @@ public class ItemTable {
                 NAME = cursor.getString(cursor.getColumnIndex("NAME"));
                 REQUIRED = cursor.getInt(cursor.getColumnIndex("REQUIRED"));
                 ACTION = cursor.getString(cursor.getColumnIndex("ACTION"));
+                SYNONYM = cursor.getString(cursor.getColumnIndex("SYNONYM"));
 
-                item1 = new ItemModel(ID, SITUATION_ID, NAME, ACTION, REQUIRED);
+                item1 = new ItemModel(ID, SITUATION_ID, NAME, ACTION, REQUIRED, SYNONYM);
                 cursor.moveToNext();
                 return item1;
             }
@@ -134,4 +140,30 @@ public class ItemTable {
         return item1;
     }
 
+    public ArrayList<String> getSynonymsByCategoryId(int idSituation){
+        ArrayList<String> items = new ArrayList<>();
+        String SYNONYM = "";
+
+        Cursor cursor = null;
+        SQLiteDatabase db = DBConnect.install(context).connect();
+        try {
+            cursor = db.rawQuery("SELECT * FROM ITEM WHERE SITUATION_ID = " + idSituation, null);
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                SYNONYM = cursor.getString(cursor.getColumnIndex("SYNONYM"));
+                items.add(SYNONYM);
+                cursor.moveToNext();
+            }
+            cursor.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if(cursor != null)
+                cursor.close();
+
+            if (db != null)
+                db.close();
+        }
+        return items;
+    }
 }

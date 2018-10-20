@@ -7,13 +7,24 @@ public class ItemModel {
     private String NAME;
     private String ACTION;
     private int REQUIRED;
+    private String SYNONYM;
 
-    public ItemModel(int ID, int SITUATION_ID, String NAME, String ACTION, int REQUIRED) {
+    public ItemModel(int ID, int SITUATION_ID, String NAME, String ACTION, int REQUIRED, String SYNONYM) {
         this.ID = ID;
         this.SITUATION_ID = SITUATION_ID;
         this.NAME = NAME;
         this.ACTION = ACTION;
         this.REQUIRED = REQUIRED;
+        this.SYNONYM = SYNONYM;
+    }
+
+
+    public String getSYNONYM() {
+        return SYNONYM;
+    }
+
+    public void setSYNONYM(String SYNONYM) {
+        this.SYNONYM = SYNONYM;
     }
 
     public int getID() {
