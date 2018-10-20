@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion 28
@@ -18,6 +19,11 @@ android {
     }
 }
 
+greendao {
+    schemaVersion 1
+    targetGenDir 'src/main/java'
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:28.0.0'
@@ -25,4 +31,19 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    implementation 'org.greenrobot:greendao:3.2.2'
+    implementation 'com.github.yuweiguocn:GreenDaoUpgradeHelper:v2.0.3'
+
+    debugImplementation 'com.willowtreeapps.hyperion:hyperion-core:0.9.23'
+    debugImplementation 'com.willowtreeapps.hyperion:hyperion-core:0.9.23'
+    debugImplementation 'com.willowtreeapps.hyperion:hyperion-attr:0.9.23'
+    debugImplementation 'com.willowtreeapps.hyperion:hyperion-measurement:0.9.23'
+    debugImplementation 'com.willowtreeapps.hyperion:hyperion-disk:0.9.23'
+    debugImplementation 'com.willowtreeapps.hyperion:hyperion-recorder:0.9.23'
+    debugImplementation 'com.willowtreeapps.hyperion:hyperion-phoenix:0.9.23'
+    debugImplementation 'com.willowtreeapps.hyperion:hyperion-crash:0.9.23'
+    debugImplementation 'com.willowtreeapps.hyperion:hyperion-shared-preferences:0.9.23'
+    debugImplementation 'com.willowtreeapps.hyperion:hyperion-geiger-counter:0.9.23'
+    debugImplementation 'com.willowtreeapps.hyperion:hyperion-timber:0.9.23'
 }
