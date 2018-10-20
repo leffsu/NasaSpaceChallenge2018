@@ -149,12 +149,15 @@ public class SpeechHelper implements RecognizerListener, VocalizerListener {
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
                     HashMap<String, String> map = new HashMap<>();
-                    map.put("Authorization", "Bearer DQRNAW4XEIV54EP4GMPKOV4S4JLGBI4F");
+                    map.put("Authorization", "Bearer QP47R4MQ6IX4K36AYXQNHAAYEK54YI4R");
                     return map;
                 }
             };
             Volley.newRequestQueue(activity).add(request);
         }
+        else
+            if(recognizerListener != null)
+                recognizerListener.onFinishListen();
     }
 
     @Override
