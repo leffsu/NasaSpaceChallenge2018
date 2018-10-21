@@ -32,7 +32,7 @@ We've decided to make an Android-powered game with speech functionality (TTS & v
 
 At the moment it's only available in Russian.
 
-Our idea is to put this game in a public place so that everyone could play. It supports both 3D (via prism) and 2D game modes. We've used next articles as an inspiration:
+Our idea is to put this game in a public place so that everyone could play. It supports both 3D (via prism) and 2D game modes. We've used the following articles as an inspiration:
 
 https://www.nasa.gov/feature/goddard/2017/a-nasa-road-trip-at-the-bottom-of-the-world
 
