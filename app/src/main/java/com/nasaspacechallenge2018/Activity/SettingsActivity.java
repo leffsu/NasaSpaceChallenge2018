@@ -1,5 +1,6 @@
 package com.nasaspacechallenge2018.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -59,6 +60,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     @OnClick(R.id.txvShowGuide)
     public void onClickTxvShow(View v){
-        Toast.makeText(this, "Rtr", Toast.LENGTH_LONG).show();
+        startActivity(new Intent(this, HowToAssemblePrismActivity.class));
+//        Toast.makeText(this, "Rtr", Toast.LENGTH_LONG).show();
     }
 }

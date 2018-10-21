@@ -21,7 +21,11 @@ import com.nasaspacechallenge2018.Utils.PreferenceHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SubsSituation3DPresenter implements Play3DPresenterInterface, RecognListener, VocalListener {
+public class SubsSituation3DPresenter
+        implements
+//        Play3DPresenterInterface
+//        ,
+        RecognListener, VocalListener {
 
     private Play3DActivityInterface mpvActivity;
     private int currentSituation;
