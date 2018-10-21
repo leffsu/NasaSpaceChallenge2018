@@ -13,6 +13,8 @@ import com.nasaspacechallenge2018.Models.ItemModel;
 import com.nasaspacechallenge2018.Models.SituationModel;
 import com.nasaspacechallenge2018.Models.SubSituationModel;
 import com.nasaspacechallenge2018.Speech.SpeechHelper;
+import com.nasaspacechallenge2018.Utils.GameSound;
+import com.nasaspacechallenge2018.Utils.PreferenceHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,5 +72,6 @@ public class SubsSituationPresenter implements Play2DPresenterInterface, AnswerH
         this.adapter.setClickAnswerListener(this);
         this.mvpActivity.setAdapter(adapter);
         this.mvpActivity.setTextSituation(subsituation.getTITLE_SUB_SITUATION());
+        this.mvpActivity.setImageSituation(PreferenceHelper.DRAWABLES[subsituation.getBACKGROUND_SUB_SITUATION()]);
     }
 }

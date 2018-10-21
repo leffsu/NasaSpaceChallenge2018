@@ -31,7 +31,8 @@
                 <category android:name="com.google.intent.category.CARDBOARD" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.SubsSituation3DActivity"></activity>
+        <activity android:name=".Activity.SubsSituation3DActivity"
+            android:theme="@style/noActionBar"></activity>
     </application>
 
 </manifest>

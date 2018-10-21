@@ -4,6 +4,7 @@
     android:layout_height="match_parent">
 
     <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg_v">
@@ -11,27 +12,23 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_v">
+            android:layout_height="wrap_content">
 
             <TextView
+                android:textColor="@color/white"
                 android:id="@+id/text_quest_2d"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp" />
 
             <ImageView
-                android:id="@+id/image_quest_2d"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="16dp"
-                android:background="@color/white"
-                android:layout_marginBottom="16dp"
-                android:minWidth="250dp"
-                android:minHeight="200dp" />
+                android:id="@+id/image_quest_2d"
+                android:layout_width="600px"
+                android:layout_height="600px"
+                android:layout_margin="8dp"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/list_button"
@@ -42,6 +39,7 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/scroll_down"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

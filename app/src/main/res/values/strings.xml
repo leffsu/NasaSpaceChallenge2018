@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Polar Quest</string>
+    <string name="app_name">ICESat-2</string>
     <string name="exit">Выйти</string>
     <string name="continueT">Continue</string>
     <string name="play2d">Играть 2D</string>

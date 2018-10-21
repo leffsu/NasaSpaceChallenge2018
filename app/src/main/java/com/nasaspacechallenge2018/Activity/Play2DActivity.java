@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +18,7 @@ import com.nasaspacechallenge2018.Interface.Play2DActivityInterface;
 import com.nasaspacechallenge2018.Interface.Play2DPresenterInterface;
 import com.nasaspacechallenge2018.Presenter.Play2DPresenter;
 import com.nasaspacechallenge2018.R;
+import com.nasaspacechallenge2018.Utils.GameSound;
 
 public class Play2DActivity extends AppCompatActivity implements Play2DActivityInterface {
 
@@ -45,6 +47,13 @@ public class Play2DActivity extends AppCompatActivity implements Play2DActivityI
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
+        ((NestedScrollView)findViewById(R.id.scroll)).post(new Runnable() {
+            @Override
+            public void run() {
+                ((NestedScrollView)findViewById(R.id.scroll)).scrollTo(0,0);
+            }
+        });
+
         presenter = new Play2DPresenter(this);
     }
 
@@ -66,13 +75,19 @@ public class Play2DActivity extends AppCompatActivity implements Play2DActivityI
     }
 
     @Override
-    public void setImageSituation(Drawable drawable) {
-        imageSituation.setImageDrawable(drawable);
+    public void setImageSituation(int drawable) {
+        imageSituation.setImageResource(drawable);
     }
 
     @Override
     public void setAdapter(AnswerAdapter adapter) {
         listAnswer.setAdapter(adapter);
+        ((NestedScrollView)findViewById(R.id.scroll)).post(new Runnable() {
+            @Override
+            public void run() {
+                ((NestedScrollView)findViewById(R.id.scroll)).scrollTo(0,0);
+            }
+        });
     }
 
     @Override

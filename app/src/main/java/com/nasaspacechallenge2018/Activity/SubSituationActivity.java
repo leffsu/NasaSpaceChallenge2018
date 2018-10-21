@@ -69,8 +69,8 @@ public class SubSituationActivity extends AppCompatActivity implements Play2DAct
     }
 
     @Override
-    public void setImageSituation(Drawable drawable) {
-        imageSituation.setImageDrawable(drawable);
+    public void setImageSituation(int drawable) {
+        imageSituation.setImageResource(drawable);
     }
 
     @Override

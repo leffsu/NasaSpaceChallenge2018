@@ -16,6 +16,8 @@ import com.nasaspacechallenge2018.Models.WitEntity;
 import com.nasaspacechallenge2018.Speech.RecognListener;
 import com.nasaspacechallenge2018.Speech.SpeechHelper;
 import com.nasaspacechallenge2018.Speech.VocalListener;
+import com.nasaspacechallenge2018.Utils.GameSound;
+import com.nasaspacechallenge2018.Utils.PreferenceHelper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,8 +34,10 @@ public class Play3DPresenter implements Play3DPresenterInterface, RecognListener
     private SpeechHelper speechHelper;
     private ArrayList<SubSituationModel> subSituationModels;
     private List<ItemModel> items;
+    private GameSound gameSound;
 
     public Play3DPresenter(Play3DActivityInterface mvpActivity) {
+        this.gameSound = new GameSound((Activity)mvpActivity);
         this.mpvActivity = mvpActivity;
         this.situationModels = SituationTable.install((Activity) mvpActivity).getAll();
         this.currentSituation = 0;
@@ -64,7 +68,8 @@ public class Play3DPresenter implements Play3DPresenterInterface, RecognListener
 
         speechHelper.sayPhrase(situation.getMAIN_DESCRIPTION());
 
-//        mpvActivity.setImage();
+        gameSound.play(GameSound.MUSIC_STEP_SNOW,0.5f);
+        mpvActivity.setImage(PreferenceHelper.DRAWABLES[situation.getBACKGROUND()]);
 //        this.mvpActivity.setTextSituation(situation.getMAIN_DESCRIPTION());
 //        this.mvpActivity.setImageSituation(situation.);
     }

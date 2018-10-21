@@ -11,11 +11,14 @@ import com.nasaspacechallenge2018.Interface.MainActivityPresenterInterface;
 import com.nasaspacechallenge2018.Presenter.MainActivityPresenter;
 import com.nasaspacechallenge2018.R;
 import com.nasaspacechallenge2018.Utils.Decompress;
+import com.nasaspacechallenge2018.Utils.GameSound;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button settingsBtn, player2dBtn, player3dBtn, continueBtn, exitBtn;
     MainActivityPresenterInterface presenter;
+    GameSound sound;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,12 +26,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         presenter = new MainActivityPresenter(this);
         Decompress.unzipDatabase(this,"nasa_db");
-
+        sound = new GameSound(this);
 
         settingsBtn = findViewById(R.id.settings);
         player2dBtn = findViewById(R.id.play_2d);
         player3dBtn = findViewById(R.id.play_3d);
         continueBtn = findViewById(R.id.continue_btn);
+        continueBtn.setVisibility(View.GONE);
         exitBtn = findViewById(R.id.exit);
 
         settingsBtn.setOnClickListener(settingsBtnListener);
@@ -36,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         continueBtn.setOnClickListener(continueBtnListener);
         player2dBtn.setOnClickListener(play2DBtnListener);
         player3dBtn.setOnClickListener(play3dBtnListener);
+        sound.play(GameSound.MUSIC_SONG,0.005f);
 
     }
 
@@ -43,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             presenter.settingsClick();
+            sound.play(GameSound.MUSIC_CLICK,0.05f);
         }
     };
 
@@ -50,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             presenter.continueClick();
+            sound.play(GameSound.MUSIC_CLICK,0.05f);
         }
     };
 
@@ -57,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             presenter.exitClick();
+            sound.play(GameSound.MUSIC_CLICK,0.05f);
         }
     };
 
@@ -64,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             presenter.play2dClick();
+            sound.play(GameSound.MUSIC_CLICK,0.05f);
         }
     };
 
@@ -71,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             presenter.play3dClick();
+            sound.play(GameSound.MUSIC_CLICK,0.05f);
         }
     };
 

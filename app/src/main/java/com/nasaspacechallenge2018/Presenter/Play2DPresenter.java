@@ -3,6 +3,7 @@ package com.nasaspacechallenge2018.Presenter;
 import android.app.Activity;
 import android.content.Intent;
 import android.speech.RecognitionListener;
+import android.widget.Toast;
 
 import com.nasaspacechallenge2018.Activity.Play2DActivity;
 import com.nasaspacechallenge2018.Adapter.AnswerAdapter;
@@ -20,6 +21,8 @@ import com.nasaspacechallenge2018.Models.SituationModel;
 import com.nasaspacechallenge2018.Models.SubSituationModel;
 import com.nasaspacechallenge2018.Speech.RecognListener;
 import com.nasaspacechallenge2018.Speech.SpeechHelper;
+import com.nasaspacechallenge2018.Utils.GameSound;
+import com.nasaspacechallenge2018.Utils.PreferenceHelper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,7 +41,10 @@ public class Play2DPresenter implements Play2DPresenterInterface, AnswerHolder.C
     private int currentSubSituation;
     private ArrayList<SubSituationModel> subSituationModels;
 
+    private GameSound gameSound;
+
     public Play2DPresenter(Play2DActivityInterface mvpActivity){
+        this.gameSound = new GameSound((Activity)mvpActivity);
         this.speechHelper = SpeechHelper.getInstance((Activity) mvpActivity);
         this.mvpActivity = mvpActivity;
         this.isPlay = false;
@@ -78,15 +84,20 @@ public class Play2DPresenter implements Play2DPresenterInterface, AnswerHolder.C
     }
 
     private void updateDate(){
-        if(currentSituation >= situationModels.size())
+        if(currentSituation >= situationModels.size()){
+            Toast.makeText((Activity)mvpActivity, "Поздравляем! Квест пройден.", Toast.LENGTH_SHORT).show();
+            ((Activity)mvpActivity).finish();
             return;
-
+        }
+        gameSound.play(GameSound.MUSIC_STEP_SNOW,0.5f);
         situation = situationModels.get(currentSituation);
         subSituationModels = SubSituationTable.install((Activity)mvpActivity).getSubSituationBySituationId(situation.getID());
 
         List<ItemModel> items = new ArrayList<>();//ItemTable.install((Activity)mvpActivity).getItemsBySituatoinId(situation.getID());
-        if(subSituationModels.size() == 0)
-            items.add(new ItemModel(0, situation.getID(), "Продолжить", "Продолжить", 0, "forward"));
+        if(subSituationModels.size() == 0) {
+            if (situationModels.size() != currentSituation + 1)
+                items.add(new ItemModel(0, situation.getID(), "Продолжить", "Продолжить", 0, "forward"));
+        }
         else {
             List<String> tempValues = Arrays.asList(situation.getCOMPONENT_TEXT_BASE().split(","));
             for (int i = 0; i <subSituationModels.size(); i++){
@@ -101,6 +112,7 @@ public class Play2DPresenter implements Play2DPresenterInterface, AnswerHolder.C
 
         this.mvpActivity.setAdapter(adapter);
         this.mvpActivity.setTextSituation(situation.getMAIN_DESCRIPTION());
+        this.mvpActivity.setImageSituation(PreferenceHelper.DRAWABLES[situation.getBACKGROUND()]);
 //        this.mvpActivity.setImageSituation(situation.);
     }
 }

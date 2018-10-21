@@ -4,7 +4,7 @@ import android.graphics.drawable.Drawable;
 
 public interface Play3DActivityInterface {
 
-    void setImage(Drawable drawable);
+    void setImage(int drawable);
 
     void setVisibilityVoiceBtn(boolean isPlay);
     void finishActivity();

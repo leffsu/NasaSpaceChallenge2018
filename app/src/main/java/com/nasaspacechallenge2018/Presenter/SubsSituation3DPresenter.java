@@ -15,6 +15,8 @@ import com.nasaspacechallenge2018.Models.WitEntity;
 import com.nasaspacechallenge2018.Speech.RecognListener;
 import com.nasaspacechallenge2018.Speech.SpeechHelper;
 import com.nasaspacechallenge2018.Speech.VocalListener;
+import com.nasaspacechallenge2018.Utils.GameSound;
+import com.nasaspacechallenge2018.Utils.PreferenceHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +58,8 @@ public class SubsSituation3DPresenter implements Play3DPresenterInterface, Recog
 
 
 
-//        mpvActivity.setImage();
+        mpvActivity.setImage(PreferenceHelper.DRAWABLES[subsituation.getBACKGROUND_SUB_SITUATION()]);
+
 //        this.mvpActivity.setTextSituation(situation.getMAIN_DESCRIPTION());
 //        this.mvpActivity.setImageSituation(situation.);
     }
@@ -64,6 +67,10 @@ public class SubsSituation3DPresenter implements Play3DPresenterInterface, Recog
     @Override
     public void playTextSituation() {
         speechHelper.sayPhrase(subsituation.getTITLE_SUB_SITUATION());
+    }
+
+    private void playTextSituationText(String text) {
+        speechHelper.sayPhrase(text);
     }
 
     @Override
@@ -104,6 +111,8 @@ public class SubsSituation3DPresenter implements Play3DPresenterInterface, Recog
 
         if(itemsModels.size() == 0)
             mpvActivity.finishActivity();
+        else playTextSituationText("Вы что-то забыли. Подумайте еще?");
+
     }
 
     @Override

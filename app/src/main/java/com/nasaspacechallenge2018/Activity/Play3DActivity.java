@@ -65,11 +65,11 @@ public class Play3DActivity extends AppCompatActivity implements Play3DActivityI
     }
 
     @Override
-    public void setImage(Drawable drawable) {
-        this.leftImage.setImageDrawable(drawable);
-        this.rightImage.setImageDrawable(drawable);
-        this.topImage.setImageDrawable(drawable);
-        this.bottomImage.setImageDrawable(drawable);
+    public void setImage(int drawable) {
+        this.leftImage.setImageResource(drawable);
+        this.rightImage.setImageResource(drawable);
+        this.topImage.setImageResource(drawable);
+        this.bottomImage.setImageResource(drawable);
     }
 
     @Override
