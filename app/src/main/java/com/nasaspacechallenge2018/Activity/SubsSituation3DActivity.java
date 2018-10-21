@@ -38,7 +38,7 @@ public class SubsSituation3DActivity extends AppCompatActivity implements Play3D
 
         answerVoiceBtn.setOnClickListener(answerVoiceListener);
         playTextSituationBtn.setOnClickListener(playTextSituationListener);
-        presenter = new SubsSituation3DPresenter(this, idSubSituation);
+//        presenter = new SubsSituation3DPresenter(this, idSubSituation);
     }
 
     @Override
