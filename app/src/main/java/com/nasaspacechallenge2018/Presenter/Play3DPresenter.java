@@ -30,7 +30,7 @@ public class Play3DPresenter implements Play3DPresenterInterface, RecognListener
     public Play3DPresenter(Play3DActivityInterface mvpActivity){
         this.mpvActivity = mvpActivity;
         this.situationModels = SituationTable.install((Activity)mvpActivity).getAll();
-        this.currentSituation = 4;
+        this.currentSituation = 0;
         this.speechHelper = SpeechHelper.getInstance((Activity)mvpActivity);
         this.speechHelper.setRecognizerListener(this);
         this.speechHelper.setVocalListener(this);

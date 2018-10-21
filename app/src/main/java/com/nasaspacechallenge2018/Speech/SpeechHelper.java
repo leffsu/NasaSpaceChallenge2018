@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
@@ -15,6 +16,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.nasaspacechallenge2018.Models.WitEntity;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -137,18 +139,23 @@ public class SpeechHelper implements RecognizerListener, VocalizerListener {
     @Override
     public void onRecordingDone(@NonNull Recognizer recognizer) {
         if(!result.equals("")) {
+            Uri.Builder builder = Uri.parse("https://api.wit.ai/message").buildUpon();
+            builder.appendQueryParameter("v", "20181021");
+            builder.appendQueryParameter("q", result);
             JsonObjectRequest request = new JsonObjectRequest(com.android.volley.Request.Method.GET,
-                    "https://api.wit.ai/message?v=20181021&q=" + result, null, new Response.Listener<JSONObject>() {
+                    builder.toString(), null, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
                     try {
                         List<WitEntity> result = new ArrayList<>();
                         for (Iterator<String> it = response.getJSONObject("entities").keys(); it.hasNext(); ) {
                             String key = it.next();
-                            result.add(new WitEntity(key,
-                                    response.getJSONObject("entities").getJSONArray(key).getJSONObject(0).getString("value"),
-                                    response.getJSONObject("entities").getJSONArray(key).getJSONObject(0).getString("type")));
-
+                            JSONArray array = response.getJSONObject("entities").getJSONArray(key);
+                            for(int i = 0;i < array.length();i++) {
+                                result.add(new WitEntity(key,
+                                        response.getJSONObject("entities").getJSONArray(key).getJSONObject(i).getString("value"),
+                                        response.getJSONObject("entities").getJSONArray(key).getJSONObject(i).getString("type")));
+                            }
                         }
                         if(recognizerListener != null)
                             recognizerListener.onResult(result);
@@ -205,8 +212,7 @@ public class SpeechHelper implements RecognizerListener, VocalizerListener {
 
     @Override
     public void onSynthesisDone(@NonNull Vocalizer vocalizer) {
-        if(vocalListener != null)
-            vocalListener.onFinishSpeak();
+
     }
 
     @Override
@@ -221,7 +227,8 @@ public class SpeechHelper implements RecognizerListener, VocalizerListener {
 
     @Override
     public void onPlayingDone(@NonNull Vocalizer vocalizer) {
-
+        if(vocalListener != null)
+            vocalListener.onFinishSpeak();
     }
 
     @Override
