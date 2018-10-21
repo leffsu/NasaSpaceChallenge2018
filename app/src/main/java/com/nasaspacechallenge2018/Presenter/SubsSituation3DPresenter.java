@@ -23,8 +23,8 @@ import java.util.List;
 
 public class SubsSituation3DPresenter
         implements
-//        Play3DPresenterInterface
-//        ,
+        Play3DPresenterInterface
+        ,
         RecognListener, VocalListener {
 
     private Play3DActivityInterface mpvActivity;
