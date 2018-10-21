@@ -77,7 +77,7 @@
         android:id="@+id/voice_answer_btn"
         android:layout_margin="8dp"
         android:padding="8dp"
-        android:src="@mipmap/micro"
+        android:src="@mipmap/micto_off"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:background="@drawable/micro_bachground"

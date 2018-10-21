@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Display;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TableLayout;
@@ -73,7 +74,18 @@ public class Play3DActivity extends AppCompatActivity implements Play3DActivityI
 
     @Override
     public void setVisibilityVoiceBtn(boolean isPlay) {
+        if(isPlay) {
+            answerVoiceBtn.setImageResource(R.mipmap.micro);
+        }
+        else {
+            answerVoiceBtn.setImageResource(R.mipmap.micto_off);
+        }
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.onResume();
     }
 
     @Override
@@ -90,7 +102,7 @@ public class Play3DActivity extends AppCompatActivity implements Play3DActivityI
 
     View.OnClickListener answerVoiceListener = new View.OnClickListener() {
         @Override
-        public void onClick(View v) {
+        public void onClick(View v) { ;
             presenter.recoverAnswer();
         }
     };

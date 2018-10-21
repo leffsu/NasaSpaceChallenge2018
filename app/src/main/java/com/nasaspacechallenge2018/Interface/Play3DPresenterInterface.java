@@ -10,4 +10,6 @@ public interface Play3DPresenterInterface {
 
     void toNext();
 
+    void onResume();
+
 }

@@ -18,6 +18,7 @@ import com.nasaspacechallenge2018.Speech.SpeechHelper;
 import com.nasaspacechallenge2018.Speech.VocalListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Play3DPresenter implements Play3DPresenterInterface, RecognListener, VocalListener {
@@ -30,6 +31,7 @@ public class Play3DPresenter implements Play3DPresenterInterface, RecognListener
     private ArrayList<String> synonyms;
     private SpeechHelper speechHelper;
     private ArrayList<SubSituationModel> subSituationModels;
+    private List<ItemModel> items;
 
     public Play3DPresenter(Play3DActivityInterface mvpActivity) {
         this.mpvActivity = mvpActivity;
@@ -49,9 +51,16 @@ public class Play3DPresenter implements Play3DPresenterInterface, RecognListener
         situation = situationModels.get(currentSituation);
         subSituationModels = SubSituationTable.install((Activity) mpvActivity).getSubSituationBySituationId(situation.getID());
 
-        List<ItemModel> items = new ArrayList<>();
+        items = new ArrayList<>();
         if (subSituationModels.size() == 0)
             items.add(new ItemModel(0, situation.getID(), "Продолжить", "Продолжить", 0, "forward"));
+        else {
+            List<String> tempValues = Arrays.asList(situation.getCOMPONENT_TEXT_BASE().split(","));
+            for (int i = 0; i <subSituationModels.size(); i++){
+                //public ItemModel(int ID, int SITUATION_ID, String NAME, String ACTION, int REQUIRED, String SYNONYM)
+                items.add(new ItemModel(subSituationModels.get(i).getID(), situation.getID(), tempValues.get(i), tempValues.get(i), 0, tempValues.get(i)));
+            }
+        }
 
         speechHelper.sayPhrase(situation.getMAIN_DESCRIPTION());
 
@@ -63,6 +72,12 @@ public class Play3DPresenter implements Play3DPresenterInterface, RecognListener
     @Override
     public void playTextSituation() {
         speechHelper.sayPhrase(situation.getMAIN_DESCRIPTION());
+    }
+
+    @Override
+    public void onResume() {
+        speechHelper.setVocalListener(this);
+        speechHelper.setRecognizerListener(this);
     }
 
     @Override
@@ -86,26 +101,29 @@ public class Play3DPresenter implements Play3DPresenterInterface, RecognListener
 
     @Override
     public void onResult(List<WitEntity> result) {
-//        if (items.size() != 0) {
-//
-//            if(items.get(0).getID() != 0) {
-//                for (int j = 0; j < items.size(); j++) {
-//                    for (int i = 0; i < result.size(); i++) {
-//                        if (items.get(j).getSYNONYM_SUB_SITUATION().equals(result.get(i).getValue()))
-//                            mpvActivity.startSubSituationActivity(items.get(i).getID());
-//                    }
-//                }
-//            }
-//            return;
-//        }
-//
+        mpvActivity.setVisibilityVoiceBtn(false);
+        if (subSituationModels.size() != 0) {
+            if(subSituationModels.get(0).getID() != 0) {
+                for (int j = 0; j < subSituationModels.size(); j++) {
+                    for (int i = 0; i < result.size(); i++) {
+                        if (subSituationModels.get(j).getSYNONYM_SUB_SITUATION().contains(result.get(i).getValue())) {
+                            mpvActivity.startSubSituationActivity(subSituationModels.get(j).getID());
+                            subSituationModels.remove(j);
+                            return;
+                        }
+                    }
+                }
+            }
+            return;
+        }
+
 //        for (int i = 0; i < result.size(); i++) {
 //            items.remove(result.get(i).getValue());
 //        }
-//
+
 //        if (synonyms.size() == 0) {
-//            currentSituation++;
-//            updateDate();
+        currentSituation++;
+        updateDate();
 //        }
     }
 
@@ -121,11 +139,11 @@ public class Play3DPresenter implements Play3DPresenterInterface, RecognListener
 
     @Override
     public void onStartListen() {
-
+        mpvActivity.setVisibilityVoiceBtn(true);
     }
 
     @Override
     public void onFinishListen() {
-
+        mpvActivity.setVisibilityVoiceBtn(false);
     }
 }

@@ -28,6 +28,7 @@ public class SubsSituation3DActivity extends AppCompatActivity implements Play3D
         setContentView(R.layout.play3d_layout);
 
         idSubSituation = getIntent().getExtras().getInt("id");
+
         leftImage = findViewById(R.id.image_left_3d);
         rightImage = findViewById(R.id.image_right_3d);
         topImage = findViewById(R.id.image_top_3d);
@@ -50,7 +51,12 @@ public class SubsSituation3DActivity extends AppCompatActivity implements Play3D
 
     @Override
     public void setVisibilityVoiceBtn(boolean isPlay) {
-
+        if(isPlay) {
+            answerVoiceBtn.setImageResource(R.mipmap.micro);
+        }
+        else {
+            answerVoiceBtn.setImageResource(R.mipmap.micto_off);
+        }
     }
 
     View.OnClickListener answerVoiceListener = new View.OnClickListener() {
