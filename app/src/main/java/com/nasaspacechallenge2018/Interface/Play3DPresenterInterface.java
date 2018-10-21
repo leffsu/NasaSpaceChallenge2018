@@ -8,4 +8,6 @@ public interface Play3DPresenterInterface {
 
     void recoverAnswer();
 
+    void toNext();
+
 }

@@ -7,4 +7,6 @@ public interface Play3DActivityInterface {
     void setImage(Drawable drawable);
 
     void setVisibilityVoiceBtn(boolean isPlay);
+    void finishActivity();
+    void startSubSituationActivity(int idSubSituation);
 }
