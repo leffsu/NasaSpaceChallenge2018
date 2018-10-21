@@ -9,4 +9,6 @@ public interface Play2DActivityInterface {
     void setTextSituation(String text);
     void setImageSituation(Drawable drawable);
     void setAdapter(AnswerAdapter adapter);
+    void finishActivity();
+    void startSubSituationActivity(int idSubSituation);
 }

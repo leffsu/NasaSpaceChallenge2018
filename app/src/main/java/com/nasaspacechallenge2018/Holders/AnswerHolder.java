@@ -7,14 +7,14 @@ import android.widget.TextView;
 
 import com.nasaspacechallenge2018.R;
 
-import static com.nasaspacechallenge2018.Adapter.AnswerAdapter.clickAnswerListener;
-
 public class AnswerHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
     public TextView testAnswer;
+    private ClickAnswerListener clickAnswerListener;
 
     public AnswerHolder(@NonNull View itemView) {
         super(itemView);
+
 
         testAnswer = itemView.findViewById(R.id.text_answer);
         testAnswer.setOnClickListener(this);
@@ -24,6 +24,10 @@ public class AnswerHolder extends RecyclerView.ViewHolder implements View.OnClic
     public void onClick(View v) {
         if(clickAnswerListener != null)
             clickAnswerListener.onClickAnswer(getAdapterPosition());
+    }
+
+    public void setClickAnswerListener(ClickAnswerListener listener){
+        this.clickAnswerListener = listener;
     }
 
     public interface ClickAnswerListener{

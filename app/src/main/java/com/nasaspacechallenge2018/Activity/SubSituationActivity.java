@@ -15,23 +15,26 @@ import android.widget.TextView;
 import com.nasaspacechallenge2018.Adapter.AnswerAdapter;
 import com.nasaspacechallenge2018.Interface.Play2DActivityInterface;
 import com.nasaspacechallenge2018.Interface.Play2DPresenterInterface;
+import com.nasaspacechallenge2018.Interface.SubsSituationPresenterInterface;
 import com.nasaspacechallenge2018.Presenter.Play2DPresenter;
+import com.nasaspacechallenge2018.Presenter.SubsSituationPresenter;
 import com.nasaspacechallenge2018.R;
 
-public class Play2DActivity extends AppCompatActivity implements Play2DActivityInterface {
-
-    private static final int RC_SUB_SITUATION = 94;
+public class SubSituationActivity extends AppCompatActivity implements Play2DActivityInterface {
 
     Play2DPresenterInterface presenter;
     private TextView textSituation;
     private ImageView imageSituation;
     private RecyclerView listAnswer;
     private FloatingActionButton scrollDown;
+    private int idSubSituation;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.play2d_layout);
+
+        idSubSituation = getIntent().getExtras().getInt("id");
 
         textSituation = findViewById(R.id.text_quest_2d);
         imageSituation = findViewById(R.id.image_quest_2d);
@@ -45,7 +48,7 @@ public class Play2DActivity extends AppCompatActivity implements Play2DActivityI
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
 
-        presenter = new Play2DPresenter(this);
+        presenter = new SubsSituationPresenter(this, idSubSituation);
     }
 
     @Override
@@ -77,22 +80,12 @@ public class Play2DActivity extends AppCompatActivity implements Play2DActivityI
 
     @Override
     public void finishActivity() {
-
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == RC_SUB_SITUATION){
-            presenter.toNext();
-        }
+        setResult(RESULT_OK);
+        finish();
     }
 
     @Override
     public void startSubSituationActivity(int idSubSituation) {
 
-        Intent intent = new Intent(this,SubSituationActivity.class);
-        intent.putExtra("id", idSubSituation);
-        startActivityForResult(intent,RC_SUB_SITUATION);
     }
 }

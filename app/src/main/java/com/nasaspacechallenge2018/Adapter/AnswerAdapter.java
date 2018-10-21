@@ -18,7 +18,7 @@ import java.util.zip.Inflater;
 
 public class AnswerAdapter extends RecyclerView.Adapter<AnswerHolder> {
 
-    public static AnswerHolder.ClickAnswerListener clickAnswerListener;
+    public AnswerHolder.ClickAnswerListener clickAnswerListener;
     private Activity activity;
     private ArrayList<ItemModel> items;
 
@@ -41,6 +41,7 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerHolder> {
         else*/ {
             answerHolder.itemView.setVisibility(View.VISIBLE);
             answerHolder.testAnswer.setText(item.getNAME());
+            answerHolder.setClickAnswerListener(clickAnswerListener);
 //            if(clickAnswerListener != null)
 //                clickAnswerListener.onClickAnswer(i);
         }
@@ -49,6 +50,10 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerHolder> {
     @Override
     public int getItemCount() {
         return items.size();
+    }
+
+    public ArrayList<ItemModel> getItems(){
+        return this.items;
     }
 
     public void setClickAnswerListener(AnswerHolder.ClickAnswerListener listener){

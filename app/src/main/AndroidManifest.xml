@@ -21,6 +21,7 @@
         </activity>
 
         <activity android:name=".Activity.Play2DActivity"/>
+        <activity android:name=".Activity.SubSituationActivity"/>
 
         <activity android:name=".Activity.Play3DActivity"
             android:theme="@style/noActionBar"/>
