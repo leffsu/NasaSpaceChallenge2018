@@ -21,7 +21,7 @@ How would the quest be different if it occurred 10 years ago? 30 years ago? 100 
 
 # Implementation
 
-We've decided to make a game with speech functionality (TTS & voice input). Our quest tells the user about how expeditions are made on the South Pole from the McMurdo station and how much the world changes around us.
+We've decided to make an Android-powered game with speech functionality (TTS & voice input) via Android SDK. Our quest tells the user about how expeditions are made on the South Pole from the McMurdo station, what difficulties they may come upon and how much the world changes around us as the time goes by.
 
 At the moment it's only available in Russian.
 
