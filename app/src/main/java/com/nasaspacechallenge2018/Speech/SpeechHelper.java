@@ -25,6 +25,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 import ru.yandex.speechkit.Emotion;
 import ru.yandex.speechkit.Error;
@@ -70,7 +72,7 @@ public class SpeechHelper implements RecognizerListener, VocalizerListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        SpeechKit.getInstance().setUuid("fb8cceed4c7d4260b885a495d264b2e2");
+        SpeechKit.getInstance().setUuid(UUID.randomUUID().toString());
 
         recognizer = new OnlineRecognizer.Builder(Language.RUSSIAN, OnlineModel.QUERIES, this)
                 .setDisableAntimat(false)
@@ -80,6 +82,7 @@ public class SpeechHelper implements RecognizerListener, VocalizerListener {
         vocalizer = new OnlineVocalizer.Builder(Language.RUSSIAN, this)
                 .setEmotion(Emotion.GOOD)
                 .setVoice(Voice.ERMIL)
+                .setSynthesisChunkTimeoutMs(10000,TimeUnit.MILLISECONDS)
                 .build(); // 1
         vocalizer.prepare();
     }

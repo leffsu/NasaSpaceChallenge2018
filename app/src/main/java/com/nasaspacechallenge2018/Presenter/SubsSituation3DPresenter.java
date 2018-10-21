@@ -22,45 +22,37 @@ import java.util.List;
 public class SubsSituation3DPresenter implements Play3DPresenterInterface, RecognListener, VocalListener {
 
     private Play3DActivityInterface mpvActivity;
-    private ArrayList<SituationModel> situationModels;
     private int currentSituation;
-    private SituationModel situation;
-    private List<ItemModel> items;
-    private ArrayList<String> synonyms;
+    private List<ItemModel> itemsModels;
     private SpeechHelper speechHelper;
     private SubSituationModel subsituation;
     private int id;
 
     public SubsSituation3DPresenter(Play3DActivityInterface mvpActivity, int id){
         this.mpvActivity = mvpActivity;
-        this.situationModels = SituationTable.install((Activity)mvpActivity).getAll();
+//        this.situationModels = SituationTable.install((Activity)mvpActivity).getAll();
         this.currentSituation = 0;
         this.speechHelper = SpeechHelper.getInstance((Activity)mvpActivity);
         this.speechHelper.setRecognizerListener(this);
         this.speechHelper.setVocalListener(this);
-        this.currentSituation = 0;
+        this.itemsModels = ItemTable.install((Activity)mvpActivity).getAll();
         this.subsituation = SubSituationTable.install((Activity) mvpActivity).getSynonymsBySubSituationId(id);
         this.id = id;
         updateDate();
     }
 
     private void updateDate(){
-        if(currentSituation >= situationModels.size())
+        if(currentSituation >= itemsModels.size())
             return;
 
-        situation = situationModels.get(currentSituation);
-        synonyms = ItemTable.install((Activity)mpvActivity).getSynonymsByCategoryId(situation.getID());
-        items = ItemTable.install((Activity)mpvActivity).getItemsBySituatoinId(situation.getID());
 
-        if(items.size() == 0)
-            items.add(new ItemModel(0, situation.getID(), "Продолжить", "Продолжить", 0, "forward"));
+        itemsModels = ItemTable.install((Activity)mpvActivity).getItemsBySituatoinId(subsituation.getID());
+//
+//        if(items.size() == 0)
+//            items.add(new ItemModel(0, situation.getID(), "Продолжить", "Продолжить", 0, "forward"));
 
-        speechHelper.sayPhrase(situation.getMAIN_DESCRIPTION());
+        speechHelper.sayPhrase(subsituation.getTITLE_SUB_SITUATION());
 
-        if(currentSituation >= items.size())
-            return;
-
-        List<ItemModel> items = ItemTable.install((Activity)mpvActivity).getItemsBySituatoinId(subsituation.getID());
 
 
 
@@ -71,7 +63,7 @@ public class SubsSituation3DPresenter implements Play3DPresenterInterface, Recog
 
     @Override
     public void playTextSituation() {
-        speechHelper.sayPhrase(situation.getMAIN_DESCRIPTION());
+        speechHelper.sayPhrase(subsituation.getTITLE_SUB_SITUATION());
     }
 
     @Override
@@ -85,17 +77,32 @@ public class SubsSituation3DPresenter implements Play3DPresenterInterface, Recog
     }
 
     @Override
+    public void toNext() {
+
+    }
+
+    @Override
+    public void onResume() {
+
+    }
+
+    @Override
     public void onResult(List<WitEntity> result) {
-        for(int i = 0; i < result.size(); i++) {
-            synonyms.remove(result.get(i).getValue());
+        mpvActivity.setVisibilityVoiceBtn(false);
+        if (itemsModels.size() != 0) {
+            if(itemsModels.get(0).getID() != 0) {
+                for (int i = 0; i < result.size(); i++) {
+                    for (int j = 0; j < itemsModels.size(); j++) {
+                        if (itemsModels.get(j).getSYNONYM().contains(result.get(i).getValue())) {
+                            itemsModels.remove(j);
+                            j--;
+                        }
+                    }
+                }
+            }
         }
 
-        if(synonyms.size() == 0){
-            currentSituation++;
-            updateDate();
-        }
-        
-        if(items.size() == 0)
+        if(itemsModels.size() == 0)
             mpvActivity.finishActivity();
     }
 
@@ -111,11 +118,11 @@ public class SubsSituation3DPresenter implements Play3DPresenterInterface, Recog
 
     @Override
     public void onStartListen() {
-
+        mpvActivity.setVisibilityVoiceBtn(true);
     }
 
     @Override
     public void onFinishListen() {
-
+        mpvActivity.setVisibilityVoiceBtn(false);
     }
 }
