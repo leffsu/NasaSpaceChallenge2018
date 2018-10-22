@@ -27,8 +27,8 @@
 
         <ImageView
             android:id="@+id/image_top_3d"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
 
             android:layout_below="@+id/text_quest_2d"
             android:background="@color/white"
@@ -38,16 +38,16 @@
             />
         <View
             android:id="@+id/anchor"
-            android:layout_width="30mm"
-            android:layout_height="30mm"
+            android:layout_width="15mm"
+            android:layout_height="15mm"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
         <ImageView
             android:id="@+id/image_left_3d"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:rotation="-90"
             android:layout_alignParentLeft="true"
             android:layout_centerInParent="true"
@@ -57,8 +57,8 @@
             android:background="@color/white"/>
         <ImageView
             android:id="@+id/image_right_3d"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:rotation="90"
             android:background="@color/white"
             app:layout_constraintLeft_toRightOf="@id/anchor"
@@ -67,8 +67,8 @@
 
         <ImageView
             android:id="@+id/image_bottom_3d"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:rotation="180"
             android:background="@color/white"
             app:layout_constraintLeft_toLeftOf="parent"

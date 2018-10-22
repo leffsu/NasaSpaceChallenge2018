@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         continueBtn.setOnClickListener(continueBtnListener);
         player2dBtn.setOnClickListener(play2DBtnListener);
         player3dBtn.setOnClickListener(play3dBtnListener);
-        sound.play(GameSound.MUSIC_SONG,0.005f);
+        sound.play(GameSound.MUSIC_SONG,0.005f,true);
 
     }
 

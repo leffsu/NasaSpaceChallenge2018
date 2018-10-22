@@ -95,7 +95,7 @@ public class Play2DPresenter implements Play2DPresenterInterface, AnswerHolder.C
 
         List<ItemModel> items = new ArrayList<>();//ItemTable.install((Activity)mvpActivity).getItemsBySituatoinId(situation.getID());
         if(subSituationModels.size() == 0) {
-            if (situationModels.size() != currentSituation + 1)
+//            if (situationModels.size() != currentSituation + 1)
                 items.add(new ItemModel(0, situation.getID(), "Продолжить", "Продолжить", 0, "forward"));
         }
         else {
@@ -112,6 +112,10 @@ public class Play2DPresenter implements Play2DPresenterInterface, AnswerHolder.C
 
         this.mvpActivity.setAdapter(adapter);
         this.mvpActivity.setTextSituation(situation.getMAIN_DESCRIPTION());
+        if(situation.getBACKGROUND() >= PreferenceHelper.DRAWABLES.length) {
+            this.mvpActivity.setImageSituation(PreferenceHelper.DRAWABLES[PreferenceHelper.DRAWABLES.length - 1]);
+            return;
+        }
         this.mvpActivity.setImageSituation(PreferenceHelper.DRAWABLES[situation.getBACKGROUND()]);
 //        this.mvpActivity.setImageSituation(situation.);
     }
